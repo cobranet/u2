@@ -71,17 +71,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
         <!-- Drawer Content -->
         <paper-menu attr-for-selected="data-route" selected="[[route]]">
-          <a data-route="home" href="{{baseUrl}}">
+          <a data-route="home" href="#!{{baseUrl}}">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
           </a>
-	  <a data-route="users" href="{{baseUrl}}users">
+	  <a data-route="users" href="#!{{baseUrl}}games">
             <iron-icon icon="info"></iron-icon>
-            <span>Users</span>
-          </a>
-          <a data-route="login" href="{{baseUrl}}login">
-            <iron-icon icon="mail"></iron-icon>
-            <span>Login</span>
+            <span>Games</span>
           </a>
         </paper-menu>
       </paper-scroll-header-panel>

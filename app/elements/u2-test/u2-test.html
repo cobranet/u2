@@ -17,8 +17,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
+
     <div id="main">Main area</div>
-    <div>Hello from <span>{{foo}}</span></div>
+    <div>Hello from <span>{{route}}</span></div>
     <ue-facebook-login
 	    appID="2028912550667185"
 	    logout-link graph-url="me?fields=name,email,birthday,picture"
@@ -43,12 +44,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	    }
 	},
 	routeChanged: function(newValue,oldValue){
+	    console.log("new value" + newValue + " oldValue " + oldValue );
 	    var page = newValue.replace("!","");
 	    var params = page.split("?")[1];
 	    var pageName = page.split("?")[0];
 	    if (pageName == "") {
 		pageName = "home";
 	    }
+	    console.log("page" + page + " pageName " + pageName );
 	    this.$.ajax.url = 'app/pages/' + pageName + '/' + pageName + '.html?' + params;
 	    this.$.ajax.generateRequest();
 	},
