@@ -37,14 +37,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	    }
 	},
 	routeChanged: function(newValue,oldValue){
-	    console.log("new value" + newValue + " oldValue " + oldValue );
 	    var page = newValue.replace("!","");
 	    var params = page.split("?")[1];
 	    var pageName = page.split("?")[0];
 	    if (pageName == "") {
 		pageName = "home";
 	    }
-	    console.log("page" + page + " pageName " + pageName );
 	    this.$.ajax.url = 'pages/' + pageName + '/' + pageName + '.html?' + params;
 	    this.$.ajax.generateRequest();
 	},
@@ -55,9 +53,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     self.async(function () {
 			
 			var links = response.detail.response.head.querySelectorAll("link");
+			console.log(links.length);
 			for (var i = 0; i <= links.length - 1; i++) {
+			    console.log(links[i]);
                             if (!window.document.head.innerHTML.indexOf(links[i].href.toLowerCase()) 
-				!= -1) {
+					     != -1) {
+					     console.log("in links");
                                     var l = document.createElement('link');
 				    console.log('link');
                                     l.rel = 'import';
