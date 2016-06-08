@@ -20,13 +20,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <div id="main">Main area</div>
     <div>Hello from <span>{{route}}</span></div>
-    <ue-facebook-login
-	    appID="2028912550667185"
-	    logout-link graph-url="me?fields=name,email,birthday,picture"
-	    scope="public_profile email user_birthday"
-	    graph-response="{{resp}}"
-	    button-size="large"
-	    auto-api-call></ue-facebook-login>
     <av-flatiron-director route="{{route}}"></av-flatiron-director>
     <iron-ajax id="ajax" url="" handle-as="document"></iron-ajax>    
   </template>
@@ -52,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 		pageName = "home";
 	    }
 	    console.log("page" + page + " pageName " + pageName );
-	    this.$.ajax.url = 'app/pages/' + pageName + '/' + pageName + '.html?' + params;
+	    this.$.ajax.url = 'pages/' + pageName + '/' + pageName + '.html?' + params;
 	    this.$.ajax.generateRequest();
 	},
 	ready:function(){

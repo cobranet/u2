@@ -71,11 +71,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </paper-toolbar>
         <!-- Drawer Content -->
         <paper-menu attr-for-selected="data-route" selected="[[route]]">
-          <a data-route="home" href="#!{{baseUrl}}">
+          <a href="#!{{baseUrl}}">
             <iron-icon icon="home"></iron-icon>
             <span>Home</span>
           </a>
-	  <a data-route="users" href="#!{{baseUrl}}games">
+	  <a  href="#!{{baseUrl}}games">
             <iron-icon icon="info"></iron-icon>
             <span>Games</span>
           </a>
@@ -91,8 +91,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <span class="space"></span>
 	  
           <!-- Toolbar icons -->
-          <paper-icon-button icon="refresh"></paper-icon-button>
-          <paper-icon-button icon="search"></paper-icon-button>
+    <ue-facebook-login
+	    appID="2028912550667185"
+	    logout-link graph-url="me?fields=name,email,birthday,picture"
+	    scope="public_profile email user_birthday"
+	    graph-response="{{resp}}"
+	    button-size="large"
+	    auto-api-call></ue-facebook-login>
 
           <!-- Application name -->
           <div class="middle middle-container">
