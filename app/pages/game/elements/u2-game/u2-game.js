@@ -1,4 +1,4 @@
-/*global Polymer, alert */
+/*global Polymer, alert,Utopia */
 (function() {
     'use strict';
     Polymer({
@@ -10,7 +10,10 @@
 	    }
 	},
 	ready:function(){
-	    alert('ready u2 game');
+	    var self = this;
+	    self.game = new Utopia.Game("11","braca","img");
+	    console.log(self.game);
+	    self.game.search.scoreCol(0);
 	}
 	
     }

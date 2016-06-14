@@ -1,0 +1,46 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<dom-module id="u2-search">
+    <template>
+	<style>
+	 :host {
+             display: block;
+	 }
+	 td {
+	     width: 30px;
+	     border: 1px solid grey;
+	     text-align: center;
+	 }
+	 table {
+	     padding: 10px;
+	 }
+	 td.score {
+	     border: 1px solid gold;
+	 }
+	</style>
+	<div>
+	    <paper-card>
+		<table>
+		    <tr>
+			<td>{{_cell(search,0,0)}}</td>
+			<td>{{_cell(search,0,1)}}</td>
+			<td>{{_cell(search,0,2)}}</td>
+		    </tr>
+		    <tr>
+			<td>{{_cell(search,1,0)}}</td>
+			<td>{{_cell(search,1,1)}}</td>
+			<td>{{_cell(search,1,2)}}</td>
+		    </tr>
+		    <tr>
+			<td class="score">{{_cell(search,2,0)}}</td>
+			<td class="score">{{_cell(search,2,1)}}</td>
+			<td class="score">{{_cell(search,2,2)}}</td>
+		    </tr>
+		</table>
+	    </paper-card>
+	</div> 
+    </template>
+    <script src="../../models/utopia.js"></script>
+    <script src='u2-search.js'>
+    </script>
+</dom-module>
+
