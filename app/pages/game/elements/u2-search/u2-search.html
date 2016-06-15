@@ -13,33 +13,26 @@
 	 table {
 	     padding: 10px;
 	 }
-	 td.score {
-	     border: 1px solid gold;
+	 tr.score td {
+	     background-color: lightgray;
 	 }
 	</style>
-	<div>
+	<div on-tap="click">
 	    <paper-card>
 		<table>
 		    <tr>
-			<td>{{_cell(search,0,0)}}</td>
-			<td>{{_cell(search,0,1)}}</td>
-			<td>{{_cell(search,0,2)}}</td>
-		    </tr>
-		    <tr>
-			<td>{{_cell(search,1,0)}}</td>
-			<td>{{_cell(search,1,1)}}</td>
-			<td>{{_cell(search,1,2)}}</td>
-		    </tr>
-		    <tr>
-			<td class="score">{{_cell(search,2,0)}}</td>
-			<td class="score">{{_cell(search,2,1)}}</td>
-			<td class="score">{{_cell(search,2,2)}}</td>
+			<template is="dom-repeat" items ="{{top}}">
+			    <td>{{arrayItem(top.*,index)}}</td>
+			</template>
 		    </tr>
 		</table>
 	    </paper-card>
-	</div> 
+	    <span>{{arrayItem(top.*,0)}}</span>
+	    <span>{{arrayItem(top.*,1)}}</span>
+	    <span>{{arrayItem(top.*,2)}}</span>
+	</div>
     </template>
-    <script src="../../models/utopia.js"></script>
+    <script src="/utopia.js"></script>
     <script src='u2-search.js'>
     </script>
 </dom-module>

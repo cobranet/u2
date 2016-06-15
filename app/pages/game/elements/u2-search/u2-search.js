@@ -4,15 +4,29 @@
     Polymer({
 	is: 'u2-search',
 	properties: {
-	    search: {
-		type: Object,
-		notify: true
+	    top : {
+		type: Array
+	    },
+	    bottom: {
+		type: Array
+	    },
+	    score: {
+		type: Array
 	    }
 	},
-	_cell: function(search,x,y){
-	    var score =  search.cell(x,y);
-	    if (score) return score;
-	    return '\xa0';
+	arrayItem: function(change,index){
+	    console.log(change);
+	    console.log(change.base[index]);
+	    return change.base[index];
+	},
+	click: function(){
+	    console.log(this.top);
+	    this.set('top.1',Math.floor((Math.random() * 6) + 1));
+	},
+	dice: function(search){
+	    alert('tu sam');
+	    
+	    return search.ldice.value;
 	}
 	
     }
