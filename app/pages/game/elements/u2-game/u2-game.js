@@ -12,7 +12,6 @@
 	ready:function(){
 	    var self = this;
 	    self.game = new Utopia.Game("11","braca","img");
-	    console.log(self.game.search.top);
 	}
 	
     }

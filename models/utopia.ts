@@ -12,7 +12,7 @@ module Utopia {
 
     }
 
-    export enum SearchState { WaitingForRoll, WriteFirstDice, WriteSecondDice };
+    export enum SearchState { WaitingForRoll, WriteFirstDice, WriteSecondDice, Finished };
 
     class Search {
 
@@ -30,7 +30,7 @@ module Utopia {
             this.state = SearchState.WaitingForRoll;
             this.top = [null, null, null];
             this.bottom = [null, null, null];
-            this.score = [-1000, -1000, -1000];
+            this.score = [null, null, null];
         }
 
         activeDiceVal() {
@@ -53,6 +53,9 @@ module Utopia {
         scoreCol(col: number) {
             if (this.top[col] != null && this.bottom[col] != null) {
                 this.score[col] = this.top[col] - this.bottom[col];
+            }
+            if (this.score[0] != null && this.score[1] != null && this.score[2] != null) {
+                this.state = SearchState.Finished;
             }
         }
 

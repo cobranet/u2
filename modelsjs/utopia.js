@@ -16,6 +16,7 @@ var Utopia;
         SearchState[SearchState["WaitingForRoll"] = 0] = "WaitingForRoll";
         SearchState[SearchState["WriteFirstDice"] = 1] = "WriteFirstDice";
         SearchState[SearchState["WriteSecondDice"] = 2] = "WriteSecondDice";
+        SearchState[SearchState["Finished"] = 3] = "Finished";
     })(Utopia.SearchState || (Utopia.SearchState = {}));
     var SearchState = Utopia.SearchState;
     ;
@@ -49,6 +50,9 @@ var Utopia;
         Search.prototype.scoreCol = function (col) {
             if (this.top[col] != null && this.bottom[col] != null) {
                 this.score[col] = this.top[col] - this.bottom[col];
+            }
+            if (this.score[0] != null && this.score[1] != null && this.score[2] != null) {
+                this.state = SearchState.Finished;
             }
         };
         Search.prototype.writeDice = function () {

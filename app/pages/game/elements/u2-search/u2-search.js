@@ -10,7 +10,7 @@
 	},
 	arrayItem: function(change,index){
 	    console.log(index);
-	    if (change.base[index] && change.base[index] != -1000 ){
+	    if (change.base[index] != null){
 		return change.base[index];
 	    }
 	    console.log('nema nista');
@@ -23,16 +23,32 @@
 	    this.notifyPath('search.rdice.value', this.search.rdice.value);
 	    this.notifyPath('search.state',this.search.state);
 	},
+	canClick: function(){
+	    return (this.search.state === Utopia.SearchState.WaitingForRoll || this.search.state === Utopia.SearchState.Finished );
+	}, 
 	clickTop: function(e){
-	    if ( this.search.state === Utopia.SearchState.WaitingForRoll ) {
+	    if ( this.canClick() )  {
 		return;
 	    }
 	    var col = e.currentTarget.attributes.col.value;
+
+	    if(this.search.top[col] != null){
+		return;
+	    }
 	    this.search.writeTop(col);
 	    this.notifyPath('search.top.'+ col, this.search.top[col]);
-	    this.notifyPath('search.score.' + col, this.search.score[col]);
+	    this.notifyPath('search.score.0', this.search.score[0]);
+	    this.notifyPath('search.score.1', this.search.score[1]);
+	    this.notifyPath('search.score.2', this.search.score[2]);
 	    this.notifyDices();
 
+	},
+	isDicesVisible: function(state){
+	    if (state == Utopia.SearchState.WaitingForRoll ||
+		state == Utopia.SearchState.Finished ) {
+		return false;
+	    }
+	    return true;
 	},
 	isButtonVisible: function(state){
 	    if (state === Utopia.SearchState.WaitingForRoll ){
@@ -46,13 +62,19 @@
 	 
 	},
 	clickBottom: function(e){
-	    if ( this.search.state === Utopia.SearchState.WaitingForRoll ) {
+	    if ( this.canClick()){
 		return;
 	    }
 	    var col = e.currentTarget.attributes.col.value;
+	    if(this.search.bottom[col] != null){
+		return;
+	    }
 	    this.search.writeBottom(col);
 	    this.notifyPath('search.bottom.'+col, this.search.bottom[col]);
-	    this.notifyPath('search.score.' +col, this.search.score[col]);
+	    this.notifyPath('search.score.0', this.search.score[0]);
+	    this.notifyPath('search.score.1', this.search.score[1]);
+	    this.notifyPath('search.score.2', this.search.score[2]);
+
 	    this.notifyDices();
 	    
 	    
