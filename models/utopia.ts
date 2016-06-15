@@ -13,6 +13,7 @@ module Utopia {
     }
 
     export enum SearchState { WaitingForRoll, WriteFirstDice, WriteSecondDice, Finished };
+    export enum SiteState { Inactive, InSearch };
 
     class Search {
 
@@ -85,15 +86,22 @@ module Utopia {
             this.scoreCol(col);
         }
     }
+
     class Site {
-        state: String;
+        state: SiteState;
+        search: Search;
         constructor(public name: String) {
+            this.state = SiteState.Inactive;
+            this.search = new Search();
         }
     }
     export class Game {
-        search: Search;
+        sites: Array<Site>;
         constructor(public userid: String, public userName: String, public userImage: string) {
-            this.search = new Search();
+            this.sites = new Array<Site>();
+            this.sites.push(new Site("Forest"));
+            this.sites.push(new Site("Desert"));
+            this.sites.push(new Site("Lake"));
         }
 
     }

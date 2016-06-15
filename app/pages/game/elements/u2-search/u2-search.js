@@ -37,6 +37,7 @@
 	    }
 	    this.search.writeTop(col);
 	    this.notifyPath('search.top.'+ col, this.search.top[col]);
+	    
 	    this.notifyPath('search.score.0', this.search.score[0]);
 	    this.notifyPath('search.score.1', this.search.score[1]);
 	    this.notifyPath('search.score.2', this.search.score[2]);

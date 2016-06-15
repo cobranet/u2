@@ -1,0 +1,20 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../u2-search/u2-search.html">
+<dom-module id="u2-site">
+    <template>
+	<style>
+	 :host {
+             display: block;
+	 }
+	 
+	</style>
+	<div>
+	    <h1>{{site.name}}</h1>
+	    <u2-search search="{{site.search}}">
+	    </u2-search> 
+	</div>
+    </template>
+    <script src="/utopia.js"></script>
+    <script src='u2-site.js'></script>
+</dom-module>
+    

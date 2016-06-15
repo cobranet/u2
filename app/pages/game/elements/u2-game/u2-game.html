@@ -1,6 +1,5 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../u2-search/u2-search.html">
-
+<link rel="import" href="../u2-site/u2-site.html">
 <dom-module id="u2-game">
   <template>
     <style>
@@ -8,10 +7,13 @@
         display: block;
       }
     </style>
-
-    <u2-search search="{{game.search}}"></u2-search>
+    <template is="dom-repeat" items="{{game.sites}}">
+        <u2-site site="{{item}}"></u2-site>
+    </template>
   </template>
+
   <script src="/utopia.js"></script>
   <script src='u2-game.js'></script>
+
 </dom-module>
 

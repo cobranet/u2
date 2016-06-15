@@ -20,6 +20,12 @@ var Utopia;
     })(Utopia.SearchState || (Utopia.SearchState = {}));
     var SearchState = Utopia.SearchState;
     ;
+    (function (SiteState) {
+        SiteState[SiteState["Inactive"] = 0] = "Inactive";
+        SiteState[SiteState["InSearch"] = 1] = "InSearch";
+    })(Utopia.SiteState || (Utopia.SiteState = {}));
+    var SiteState = Utopia.SiteState;
+    ;
     var Search = (function () {
         function Search() {
             var i;
@@ -83,6 +89,8 @@ var Utopia;
     var Site = (function () {
         function Site(name) {
             this.name = name;
+            this.state = SiteState.Inactive;
+            this.search = new Search();
         }
         return Site;
     }());
@@ -91,7 +99,10 @@ var Utopia;
             this.userid = userid;
             this.userName = userName;
             this.userImage = userImage;
-            this.search = new Search();
+            this.sites = new Array();
+            this.sites.push(new Site("Forest"));
+            this.sites.push(new Site("Desert"));
+            this.sites.push(new Site("Lake"));
         }
         return Game;
     }());
