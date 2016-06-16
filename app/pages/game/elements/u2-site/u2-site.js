@@ -7,6 +7,12 @@
 	    site: {
 		type: Object
 	    }
+	},
+	isInSearch: function(state){
+	    if(state == Utopia.SiteState.InSearch){
+		return false;
+	    }
+	    return true;
 	}
     }
 );

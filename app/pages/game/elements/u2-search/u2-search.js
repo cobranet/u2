@@ -16,6 +16,11 @@
 	    console.log('nema nista');
 	    return '\xa0';
 	},
+	notifyScore: function(col){
+	    this.notifyPath('search.score.'+col, -1000);
+	    this.notifyPath('search.score.'+col, this.search.score[col]);
+
+	},
 	notifyDices: function(){
 	    this.notifyPath('search.ldice.dicesize', this.search.ldice.dicesize);
 	    this.notifyPath('search.rdice.dicesize', this.search.rdice.dicesize);
@@ -36,11 +41,9 @@
 		return;
 	    }
 	    this.search.writeTop(col);
+	    this.notifyPath('search.top.'+ col, -1000);
 	    this.notifyPath('search.top.'+ col, this.search.top[col]);
-	    
-	    this.notifyPath('search.score.0', this.search.score[0]);
-	    this.notifyPath('search.score.1', this.search.score[1]);
-	    this.notifyPath('search.score.2', this.search.score[2]);
+	    this.notifyScore();
 	    this.notifyDices();
 
 	},
@@ -71,11 +74,10 @@
 		return;
 	    }
 	    this.search.writeBottom(col);
+	    /* some bug in notify */
+	    this.notifyPath('search.bottom.'+col, -1000);
 	    this.notifyPath('search.bottom.'+col, this.search.bottom[col]);
-	    this.notifyPath('search.score.0', this.search.score[0]);
-	    this.notifyPath('search.score.1', this.search.score[1]);
-	    this.notifyPath('search.score.2', this.search.score[2]);
-
+	    this.notifyScore();
 	    this.notifyDices();
 	    
 	    

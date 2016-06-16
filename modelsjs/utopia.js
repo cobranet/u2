@@ -87,8 +87,9 @@ var Utopia;
         return Search;
     }());
     var Site = (function () {
-        function Site(name) {
+        function Site(name, image) {
             this.name = name;
+            this.image = image;
             this.state = SiteState.Inactive;
             this.search = new Search();
         }
@@ -100,9 +101,9 @@ var Utopia;
             this.userName = userName;
             this.userImage = userImage;
             this.sites = new Array();
-            this.sites.push(new Site("Forest"));
-            this.sites.push(new Site("Desert"));
-            this.sites.push(new Site("Lake"));
+            this.sites.push(new Site("Forest", "forest.png"));
+            this.sites.push(new Site("Desert", "desert.png"));
+            this.sites.push(new Site("Lake", "swamp.png"));
         }
         return Game;
     }());

@@ -6,12 +6,20 @@
 	 :host {
              display: block;
 	 }
-	 
+	 .site {
+	     padding: 10px;
+	 }
+	 .sitecontent {
+	     min-height: 150px;
+	     }
 	</style>
-	<div>
-	    <h1>{{site.name}}</h1>
-	    <u2-search search="{{site.search}}">
-	    </u2-search> 
+	<div class="site horizontal">
+	    <paper-card heading="{{site.name}}">
+		<div class="card-content sitecontent" style="background:url({{site.image}})" >
+		    <u2-search hidden$="{{!isInSearch(site.state)}}"  search="{{site.search}}">
+		    </u2-search>
+		</div>
+	    </paper-card>
 	</div>
     </template>
     <script src="/utopia.js"></script>

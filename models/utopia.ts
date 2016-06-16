@@ -90,7 +90,7 @@ module Utopia {
     class Site {
         state: SiteState;
         search: Search;
-        constructor(public name: String) {
+        constructor(public name: String, public image: String) {
             this.state = SiteState.Inactive;
             this.search = new Search();
         }
@@ -99,9 +99,9 @@ module Utopia {
         sites: Array<Site>;
         constructor(public userid: String, public userName: String, public userImage: string) {
             this.sites = new Array<Site>();
-            this.sites.push(new Site("Forest"));
-            this.sites.push(new Site("Desert"));
-            this.sites.push(new Site("Lake"));
+            this.sites.push(new Site("Forest", "forest.png"));
+            this.sites.push(new Site("Desert", "desert.png"));
+            this.sites.push(new Site("Lake", "swamp.png"));
         }
 
     }
