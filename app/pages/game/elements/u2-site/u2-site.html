@@ -1,5 +1,6 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../u2-search/u2-search.html">
+<link rel="import" href="../u2-siteinfo/u2-siteinfo.html">
 <dom-module id="u2-site">
     <template>
 	<style>
@@ -11,15 +12,32 @@
 	 }
 	 .sitecontent {
 	     min-height: 150px;
-	     }
+	 }
+	 .card-action {
+	     text-align: center;
+	     padding: 30px;
+	 }
+	 .searchbtn {
+	     background: blue;
+	     margin: 20px;
+	     color: white;
+	     padding: 10px;
+	     margin-top: 20px;
+	 }
 	</style>
 	<div class="site horizontal">
 	    <paper-card heading="{{site.name}}">
 		<div class="card-content sitecontent" style="background:url({{site.image}})" >
-		    <u2-search hidden$="{{!isInSearch(site.state)}}"  search="{{site.search}}">
-		    </u2-search>
+		    <div class="info">
+			<u2-search hidden$="{{!isInSearch(site.state)}}"  search="{{site.search}}"></u2-search>
+			<u2-siteinfo hidden$="{{isInSearch(site.state)}}" site="{{site}}"></u2-siteinfo>
+		    </div>
+		    <div hidden$="{{isInSearch(site.state)}}" class="card-action">
+			<paper-button raised class="searchbtn" on-tap="search" >SEARCH</paper-button>
+		    </div>
 		</div>
 	    </paper-card>
+
 	</div>
     </template>
     <script src="/utopia.js"></script>

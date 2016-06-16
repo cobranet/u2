@@ -86,22 +86,64 @@ module Utopia {
             this.scoreCol(col);
         }
     }
+    class Component {
+        constructor(public name: String, public image: String, public color: String, public desc?: String) {
+        }
+    }
+    class Construct {
+        constructor(public name: String, public image: String, public color: String, public desc?: String) {
 
+        }
+    }
+    class Treasure {
+        constructor(public name: String, public image: String, public color: String, public desc?: String) {
+
+        }
+    }
+    class TimeLapse {
+        current: number;
+        constructor(public times: Array<number>) {
+            this.current = 0;
+        }
+    }
     class Site {
         state: SiteState;
         search: Search;
-        constructor(public name: String, public image: String) {
+        num_search: number;
+        constructor(public name: String, public image: String, public component: Component, public construct: Construct, public treasure: Treasure, public timelapse: TimeLapse) {
             this.state = SiteState.Inactive;
             this.search = new Search();
+            this.num_search = 0;
         }
     }
     export class Game {
         sites: Array<Site>;
         constructor(public userid: String, public userName: String, public userImage: string) {
             this.sites = new Array<Site>();
-            this.sites.push(new Site("Forest", "forest.png"));
-            this.sites.push(new Site("Desert", "desert.png"));
-            this.sites.push(new Site("Lake", "swamp.png"));
+            this.sites.push(new Site("Forest", "forest.png",
+                new Component("Silver", "silver.png", "grey", "Silver is very neat"),
+                new Construct("Seal of Balance", "seal.png", "red", "Seal of balance is very hard to get"),
+                new Treasure("Ice plate", "ice_plate.png", "blue", "Super treasure"),
+                new TimeLapse([-1, -1, 0, 0, 0, 0])
+            ));
+            this.sites.push(new Site("Desert", "desert.png",
+                new Component("Quarz", "quarz.png", "cyan", "Quarc is esenciall"),
+                new Construct("Void gate", "void.png", "red", "Void gate is only thing that can save world"),
+                new Treasure("The ancient record", "record.png", "yellow", "Ancient record of engine"),
+                new TimeLapse([-1, 0, 0, -1, 0, 0])
+            ));
+            this.sites.push(new Site("Lake", "swamp.png",
+                new Component("Gum", "gum.png", "black", "Bouncy"),
+                new Construct("Bracelet of los", "bracelet.png", "red", "What the fuck is this"),
+                new Treasure("Molted shard", "molted.png", "gold", "Molted"),
+                new TimeLapse([-1, 0, -1, 0, -1, 0])
+            ));
+            this.sites.push(new Site("Polar", "pole.png",
+                new Component("Lead", "lead.png", "maroon", "Heavy"),
+                new Construct("Crystal Battery", "battery.png", "red", "Batery for mashine"),
+                new Treasure("Shimmering Moonlace", "moonlace.png", "navy", "Shimmering"),
+                new TimeLapse([-1, 0, 0, -1, 0, 0])
+            ));
         }
 
     }

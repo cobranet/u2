@@ -10,9 +10,13 @@
 	},
 	isInSearch: function(state){
 	    if(state == Utopia.SiteState.InSearch){
-		return false;
+		return true;
 	    }
-	    return true;
+	    return false;
+	},
+	search: function(){
+	    this.site.state = Utopia.SiteState.InSearch;
+	    this.notifyPath('site.state',this.site.state);
 	}
     }
 );

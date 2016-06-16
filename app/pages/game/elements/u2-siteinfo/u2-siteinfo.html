@@ -1,0 +1,25 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../u2-search/u2-search.html">
+<link rel="import" href="../u2-timelapse/u2-timelapse.html">
+<dom-module id="u2-siteinfo">
+    <template>
+	<style>
+	 :host {
+             display: block;
+	 }
+	 .paper-card: {
+	     padding: 10px;
+	 }
+	</style>
+	<div>
+	  <paper-card elevation="3">
+	    <u2-timelapse timelapse="{{site.timelapse}}"></u2-timelapse>
+	    <div><small><span>{{site.component.name}}</span></small></div>
+	    <div><small><span>{{site.construct.name}}</span></small></div>
+	    <div><small><span>{{site.treasure.name}}</span></small></div>
+	  </paper-card>
+	  <div>
+    </template>
+    <script src="/utopia.js"></script>
+    <script src='u2-siteinfo.js'></script>
+</dom-module>

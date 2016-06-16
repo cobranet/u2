@@ -86,12 +86,51 @@ var Utopia;
         };
         return Search;
     }());
-    var Site = (function () {
-        function Site(name, image) {
+    var Component = (function () {
+        function Component(name, image, color, desc) {
             this.name = name;
             this.image = image;
+            this.color = color;
+            this.desc = desc;
+        }
+        return Component;
+    }());
+    var Construct = (function () {
+        function Construct(name, image, color, desc) {
+            this.name = name;
+            this.image = image;
+            this.color = color;
+            this.desc = desc;
+        }
+        return Construct;
+    }());
+    var Treasure = (function () {
+        function Treasure(name, image, color, desc) {
+            this.name = name;
+            this.image = image;
+            this.color = color;
+            this.desc = desc;
+        }
+        return Treasure;
+    }());
+    var TimeLapse = (function () {
+        function TimeLapse(times) {
+            this.times = times;
+            this.current = 0;
+        }
+        return TimeLapse;
+    }());
+    var Site = (function () {
+        function Site(name, image, component, construct, treasure, timelapse) {
+            this.name = name;
+            this.image = image;
+            this.component = component;
+            this.construct = construct;
+            this.treasure = treasure;
+            this.timelapse = timelapse;
             this.state = SiteState.Inactive;
             this.search = new Search();
+            this.num_search = 0;
         }
         return Site;
     }());
@@ -101,9 +140,10 @@ var Utopia;
             this.userName = userName;
             this.userImage = userImage;
             this.sites = new Array();
-            this.sites.push(new Site("Forest", "forest.png"));
-            this.sites.push(new Site("Desert", "desert.png"));
-            this.sites.push(new Site("Lake", "swamp.png"));
+            this.sites.push(new Site("Forest", "forest.png", new Component("Silver", "silver.png", "grey", "Silver is very neat"), new Construct("Seal of Balance", "seal.png", "red", "Seal of balance is very hard to get"), new Treasure("Ice plate", "ice_plate.png", "blue", "Super treasure"), new TimeLapse([-1, -1, 0, 0, 0, 0])));
+            this.sites.push(new Site("Desert", "desert.png", new Component("Quarz", "quarz.png", "cyan", "Quarc is esenciall"), new Construct("Void gate", "void.png", "red", "Void gate is only thing that can save world"), new Treasure("The ancient record", "record.png", "yellow", "Ancient record of engine"), new TimeLapse([-1, 0, 0, -1, 0, 0])));
+            this.sites.push(new Site("Lake", "swamp.png", new Component("Gum", "gum.png", "black", "Bouncy"), new Construct("Bracelet of los", "bracelet.png", "red", "What the fuck is this"), new Treasure("Molted shard", "molted.png", "gold", "Molted"), new TimeLapse([-1, 0, -1, 0, -1, 0])));
+            this.sites.push(new Site("Polar", "pole.png", new Component("Lead", "lead.png", "maroon", "Heavy"), new Construct("Crystal Battery", "battery.png", "red", "Batery for mashine"), new Treasure("Shimmering Moonlace", "moonlace.png", "navy", "Shimmering"), new TimeLapse([-1, 0, 0, -1, 0, 0])));
         }
         return Game;
     }());

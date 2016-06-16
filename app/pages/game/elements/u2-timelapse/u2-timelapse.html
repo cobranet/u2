@@ -1,0 +1,42 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<dom-module id="u2-timelapse">
+  <template>
+    <style>
+     :host {
+         display: block;
+     }
+     .block {
+	 display: flex;
+     }
+     .one {
+	 font-size: 110%;
+     }
+     .zero {
+	 font-size: 95%;
+     }
+     .used {
+	 color: red;
+
+     }
+     .notused {
+	 color: green;
+     }
+    </style>
+    <div class="block">
+      <template is="dom-repeat" items="{{timelapse.times}}">
+	  <template is="dom-if" if="{{lapse(item)}}">
+	      <span  class$="{{numclass(index)}}">&#9312</span>
+	  </template>
+	  <template is="dom-if" if="{{!lapse(item)}}">
+	      <span class$="{{numclass(index)}}">&#9450</span>
+	  </template>
+	  
+	</template>
+    </div>
+  </template>
+  
+  <script src="/utopia.js"></script>
+  <script src='u2-timelapse.js'></script>
+  
+</dom-module>
+
