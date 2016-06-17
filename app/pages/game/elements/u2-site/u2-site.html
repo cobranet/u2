@@ -1,6 +1,7 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../u2-search/u2-search.html">
 <link rel="import" href="../u2-siteinfo/u2-siteinfo.html">
+<link rel="import" href="../u2-sscore/u2-sscore.html">
 <dom-module id="u2-site">
     <template>
 	<style>
@@ -32,13 +33,14 @@
 			<u2-search hidden$="{{!isInSearch(site.state)}}"  search="{{site.search}}"></u2-search>
 			<u2-siteinfo hidden$="{{isInSearch(site.state)}}" site="{{site}}"></u2-siteinfo>
 		    </div>
-		    <div hidden$="{{isInSearch(site.state)}}" class="card-action">
+		    <div hidden$="{{!isButtonVisible(site.state)}}" class="card-action">
 			<paper-button raised class="searchbtn" on-tap="search" >SEARCH</paper-button>
 		    </div>
 		</div>
 	    </paper-card>
-
+	    
 	</div>
+	<u2-sscore score="{{score(site.search.finalScore)}}"></u2-sscore>
     </template>
     <script src="/utopia.js"></script>
     <script src='u2-site.js'></script>

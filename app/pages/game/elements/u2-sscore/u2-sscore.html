@@ -1,0 +1,21 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<dom-module id="u2-sscore">
+  <template>
+    <style>
+     :host {
+         display: block;
+     }
+    </style>
+    	<div>
+	  <paper-card elevation="3" heading$="{{heading(score.score)}}" >
+	    <h5><span>{{score.message}}</span></h5>
+	    <iron-image  style="width:150px; height:150px;" sizing="contain" hidden$="{{!isConstruct()}}" src="{{score.construct.image}}"</iron-image>
+            <paper-button>OK</paper-button>  			 
+	  </paper-card>
+	  <div>
+  </template>
+  
+  <script src="/utopia.js"></script>
+  <script src='u2-sscore.js'></script>
+  
+</dom-module>

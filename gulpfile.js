@@ -8,7 +8,9 @@ var ts = require('gulp-typescript');
 gulp.task('typescript',function(){
     gulp.src('models/**.ts')
 	.pipe(ts({
-	    noImplicitAny: true}))
+	    noImplicitAny: true,
+	    module: 'commonjs'
+	}))
 	.pipe(gulp.dest('modelsjs'));
 });
 		 

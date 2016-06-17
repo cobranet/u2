@@ -22,6 +22,7 @@ app.get("/", function(req, res){
 
 app.use(express.static(path.join(__dirname,'../app')));
 app.use(express.static(path.join(__dirname,'../app/images/sites')));
+app.use(express.static(path.join(__dirname,'../app/images/constructs')));
 app.use(express.static(path.join(__dirname,'../modelsjs')));
 app.use(express.static(path.join(__dirname,'../app/pages')));
 

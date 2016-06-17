@@ -9,11 +9,9 @@
 	    }
 	},
 	arrayItem: function(change,index){
-	    console.log(index);
 	    if (change.base[index] != null){
 		return change.base[index];
 	    }
-	    console.log('nema nista');
 	    return '\xa0';
 	},
 	notifyScore: function(col){
@@ -27,6 +25,9 @@
 	    this.notifyPath('search.ldice.value', this.search.ldice.value);
 	    this.notifyPath('search.rdice.value', this.search.rdice.value);
 	    this.notifyPath('search.state',this.search.state);
+	    if (this.search.state == Utopia.SearchState.Finished){
+		this.fire('search_end',{score: this.search.finalScore});
+	    }
 	},
 	canClick: function(){
 	    return (this.search.state === Utopia.SearchState.WaitingForRoll || this.search.state === Utopia.SearchState.Finished );
