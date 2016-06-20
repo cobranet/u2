@@ -11,9 +11,6 @@
 	    
 	},
 	handleTap: function(){
-	    if(!clickable){
-		return;
-	    }
 	    if (this.dice.rollable) {
 		this.dice.roll();
 	    }

@@ -36,7 +36,6 @@
 	    this.game.sites.forEach(function(site,index){
 		if (index != e.detail.search ) {
 		    site.state = Utopia.SiteState.OtherSearch;
-		    site.name = "No Name";
 		    that.notifyPath('game.sites.'+ index +'.state',that.game.sites[index].state);
 		    console.log(site.name);
 		}
