@@ -12,10 +12,7 @@
 	    return "You score: " + score;
 	},
 	isConstruct: function(){
-	    if ( this.score.stype === 'construct' ){
-		return true;
-	    }
-	    return false;
+	    return true;
 	}
     }
 	   );
