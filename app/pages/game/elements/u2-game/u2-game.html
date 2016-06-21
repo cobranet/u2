@@ -12,8 +12,7 @@
      }
     </style>
     <div class="wild">
-	<paper-button on-click="openToast">Open Toast</paper-button>
-	<paper-toast id="toast" text="{{toastText(game.toast_text)}}"></paper-toast>
+	<paper-toast id="toast" text="{{toast_text}}"></paper-toast>
 	<template is="dom-repeat" items="{{game.sites}}">
             <u2-site ind="{{index}}" site="{{item}}"></u2-site>
 	</template>

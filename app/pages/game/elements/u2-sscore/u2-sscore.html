@@ -1,19 +1,37 @@
-<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../../bower_components/polymer/polymer.html"
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <dom-module id="u2-sscore">
-  <template>
-    <style>
-     :host {
-         display: block;
-     }
-    </style>
+    <template>
+	<style>
+	 :host {
+             display: block;
+	 }
+	 .okclass {
+	     background: blue;
+	     margin: 20px;
+	     color: white;
+	     padding: 10px;
+	     margin-top: 20px;
+	 }
+
+	</style>
     	<div>
-	  <paper-card elevation="3" >
-	    <h5><span>{{score.message}}</span></h5>
-	    <iron-image  style="width:150px; height:150px;" sizing="contain" hidden$="{{!isConstruct()}}" src="{{score.construct.image}}"</iron-image>
-            <paper-button>OK</paper-button>  			 
-	  </paper-card>
-	  <div>
-  </template>
+	    <paper-card elevation="3" >
+		<h5><span>{{score.message}}</span></h5>
+		<div>
+		    <iron-image  style="width:100px; height:110px;" sizing="contain" hidden$="{{!isConstruct()}}" src="{{score.construct.image}}"</iron-image>
+		</div>
+		<div>
+		    <paper-button raised class="okclass" on-tap="okrez">
+			<iron-icon icon="flag"></iron-icon>
+			OK
+		    </paper-button>
+		    
+		</div>
+		
+	    </paper-card>
+	    <div>
+    </template>
   
   <script src="/utopia.js"></script>
   <script src='u2-sscore.js'></script>

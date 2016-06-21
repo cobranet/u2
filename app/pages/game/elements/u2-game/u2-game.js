@@ -13,20 +13,28 @@
 		notify: true
 	    },
 	    toast_text: {
-		type: String
+		type: String,
+		notify: true
 	    }
 	},
 	ready:function(){
 	    var self = this;
-	    self.game = new Utopia.Game("11","braca","img");
+	    self.game = new Utopia.Game(new Utopia.Player("11","braca","img"));
 	    
 	},
 	toastText:function(text){
 	    return text;
 	},
 	onSearchEnd: function(e){
-	    this.toast_text="Your score : " + e.detail.score;
+	    var that = this;
+	    this.toast_text="Your score : " + e.detail.score.score;
 	    this.$.toast.open();
+	    this.game.sites.forEach(function(site,index){
+		site.state = Utopia.SiteState.Inactive;
+		that.notifyPath('game.sites.'+ index +'.state',that.game.sites[index].state);
+	    });
+	    
+	    
 	},
 	openToast: function() {
 	    this.$.toast.open();
@@ -37,7 +45,7 @@
 		if (index != e.detail.search ) {
 		    site.state = Utopia.SiteState.OtherSearch;
 		    that.notifyPath('game.sites.'+ index +'.state',that.game.sites[index].state);
-		    console.log(site.name);
+
 		}
 	    });
 	}

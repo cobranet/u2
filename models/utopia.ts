@@ -15,6 +15,10 @@ module Utopia {
     export enum SearchState { WaitingForRoll, WriteFirstDice, WriteSecondDice, Finished };
     export enum SiteState { Inactive, InSearch, OtherSearch, ScoreSearch };
 
+    export class Player {
+        constructor(public id: String, public name: String, public image: String) {
+        }
+    }
     class Search {
 
         ldice: Dice;
@@ -156,7 +160,7 @@ module Utopia {
 
     export class Game {
         sites: Array<Site>;
-        constructor(public userid: String, public userName: String, public userImage: string) {
+        constructor(public player: Player) {
             this.sites = new Array<Site>();
             this.sites.push(new Site("Forest", "forest.png",
                 new Component("Silver", "silver.png", "grey", "Silver is very neat"),
@@ -166,13 +170,13 @@ module Utopia {
             ));
             this.sites.push(new Site("Desert", "desert.png",
                 new Component("Quarz", "quarz.png", "cyan", "Quarc is esenciall"),
-                new Construct("Void gate", "void.png", "red", "Void gate is only thing that can save world"),
+                new Construct("Void gate", "voidgate.png", "red", "Void gate is only thing that can save world"),
                 new Treasure("The ancient record", "record.png", "yellow", "Ancient record of engine"),
                 new TimeLapse([-1, 0, 0, -1, 0, 0])
             ));
             this.sites.push(new Site("Lake", "swamp.png",
                 new Component("Gum", "gum.png", "black", "Bouncy"),
-                new Construct("Bracelet of los", "bracelet.png", "red", "What the fuck is this"),
+                new Construct("Bracelet of los", "bracetoflos.png", "red", "What the fuck is this"),
                 new Treasure("Molted shard", "molted.png", "gold", "Molted"),
                 new TimeLapse([-1, 0, -1, 0, -1, 0])
             ));

@@ -28,6 +28,15 @@ var Utopia;
     })(Utopia.SiteState || (Utopia.SiteState = {}));
     var SiteState = Utopia.SiteState;
     ;
+    var Player = (function () {
+        function Player(id, name, image) {
+            this.id = id;
+            this.name = name;
+            this.image = image;
+        }
+        return Player;
+    }());
+    Utopia.Player = Player;
     var Search = (function () {
         function Search() {
             var i;
@@ -171,14 +180,12 @@ var Utopia;
         return Site;
     }());
     var Game = (function () {
-        function Game(userid, userName, userImage) {
-            this.userid = userid;
-            this.userName = userName;
-            this.userImage = userImage;
+        function Game(player) {
+            this.player = player;
             this.sites = new Array();
             this.sites.push(new Site("Forest", "forest.png", new Component("Silver", "silver.png", "grey", "Silver is very neat"), new Construct("Seal of Balance", "construct1.png", "red", "Seal of balance is very hard to get"), new Treasure("Ice plate", "ice_plate.png", "blue", "Super treasure"), new TimeLapse([-1, -1, 0, 0, 0, 0])));
-            this.sites.push(new Site("Desert", "desert.png", new Component("Quarz", "quarz.png", "cyan", "Quarc is esenciall"), new Construct("Void gate", "void.png", "red", "Void gate is only thing that can save world"), new Treasure("The ancient record", "record.png", "yellow", "Ancient record of engine"), new TimeLapse([-1, 0, 0, -1, 0, 0])));
-            this.sites.push(new Site("Lake", "swamp.png", new Component("Gum", "gum.png", "black", "Bouncy"), new Construct("Bracelet of los", "bracelet.png", "red", "What the fuck is this"), new Treasure("Molted shard", "molted.png", "gold", "Molted"), new TimeLapse([-1, 0, -1, 0, -1, 0])));
+            this.sites.push(new Site("Desert", "desert.png", new Component("Quarz", "quarz.png", "cyan", "Quarc is esenciall"), new Construct("Void gate", "voidgate.png", "red", "Void gate is only thing that can save world"), new Treasure("The ancient record", "record.png", "yellow", "Ancient record of engine"), new TimeLapse([-1, 0, 0, -1, 0, 0])));
+            this.sites.push(new Site("Lake", "swamp.png", new Component("Gum", "gum.png", "black", "Bouncy"), new Construct("Bracelet of los", "bracetoflos.png", "red", "What the fuck is this"), new Treasure("Molted shard", "molted.png", "gold", "Molted"), new TimeLapse([-1, 0, -1, 0, -1, 0])));
             this.sites.push(new Site("Polar", "pole.png", new Component("Lead", "lead.png", "maroon", "Heavy"), new Construct("Crystal Battery", "battery.png", "red", "Batery for mashine"), new Treasure("Shimmering Moonlace", "moonlace.png", "navy", "Shimmering"), new TimeLapse([-1, 0, 0, -1, 0, 0])));
             this.sites.push(new Site("Castle", "castle.png", new Component("Wax", "wax.png", "yellow", "Sticky"), new Construct("Scrying Lens", "lens.png", "red", "Lens for mashine"), new Treasure("Scale of the infinity", "scale.png", "navy", "Scale"), new TimeLapse([-1, 0, 0, -1, 0, 0])));
             this.sites.push(new Site("Island", "island.png", new Component("Silica", "silica.png", "yellow", "Sparky"), new Construct("Scrying Lens", "lens.png", "red", "Lens for mashine"), new Treasure("Scale of the infinity", "scale.png", "navy", "Scale"), new TimeLapse([-1, 0, 0, -1, 0, 0])));

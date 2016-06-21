@@ -10,6 +10,10 @@
 	 }
 	 .site {
 	     padding: 10px;
+
+	 }
+	 .sitepaper {
+	     min-width: 200px;
 	 }
 	 .sitecontent {
 	     min-height: 150px;
@@ -27,11 +31,12 @@
 	 }
 	</style>
 	<div class="site horizontal">
-	    <paper-card heading="{{site.name}}">
+	    <paper-card class="sitepaper" heading="{{site.name}}">
 		<div class="card-content sitecontent" style="background:url({{site.image}})" >
 		    <div class="info">
-			<u2-search hidden$="{{!isInSearch(site.state)}}"  search="{{site.search}}"></u2-search>
-			<u2-siteinfo hidden$="{{isInSearch(site.state)}}" site="{{site}}"></u2-siteinfo>
+			<u2-search hidden$="{{!isSearchShown(site.state)}}"  search="{{site.search}}"></u2-search>
+			<u2-siteinfo hidden$="{{!isInfoShown(site.state)}}" site="{{site}}"></u2-siteinfo>
+			<u2-sscore hidden$="{{!isResultShown(site.state)}}"  score = "{{score(site.search.finalScore)}}" ></u2-sscore>
 		    </div>
 		    <div hidden$="{{!isButtonVisible(site.state)}}" class="card-action">
 			<paper-button raised class="searchbtn" on-tap="search" >SEARCH</paper-button>
@@ -40,7 +45,6 @@
 	    </paper-card>
 	    
 	</div>
-	<u2-sscore score = "{{score(site.search.finalScore)}}" ></u2-sscore>
     </template>
     <script src="/utopia.js"></script>
     <script src='u2-site.js'></script>
