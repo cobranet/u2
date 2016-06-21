@@ -1,3 +1,4 @@
+import { SearchState, SiteState } from './enums';
 module Utopia {
     class Dice {
         constructor(public value: number,
@@ -12,8 +13,6 @@ module Utopia {
 
     }
 
-    export enum SearchState { WaitingForRoll, WriteFirstDice, WriteSecondDice, Finished };
-    export enum SiteState { Inactive, InSearch, OtherSearch, ScoreSearch };
 
     export class Player {
         constructor(public id: String, public name: String, public image: String) {

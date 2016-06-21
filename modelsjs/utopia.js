@@ -1,3 +1,5 @@
+"use strict";
+var enums_1 = require('./enums');
 var Utopia;
 (function (Utopia) {
     var Dice = (function () {
@@ -12,22 +14,6 @@ var Utopia;
         };
         return Dice;
     }());
-    (function (SearchState) {
-        SearchState[SearchState["WaitingForRoll"] = 0] = "WaitingForRoll";
-        SearchState[SearchState["WriteFirstDice"] = 1] = "WriteFirstDice";
-        SearchState[SearchState["WriteSecondDice"] = 2] = "WriteSecondDice";
-        SearchState[SearchState["Finished"] = 3] = "Finished";
-    })(Utopia.SearchState || (Utopia.SearchState = {}));
-    var SearchState = Utopia.SearchState;
-    ;
-    (function (SiteState) {
-        SiteState[SiteState["Inactive"] = 0] = "Inactive";
-        SiteState[SiteState["InSearch"] = 1] = "InSearch";
-        SiteState[SiteState["OtherSearch"] = 2] = "OtherSearch";
-        SiteState[SiteState["ScoreSearch"] = 3] = "ScoreSearch";
-    })(Utopia.SiteState || (Utopia.SiteState = {}));
-    var SiteState = Utopia.SiteState;
-    ;
     var Player = (function () {
         function Player(id, name, image) {
             this.id = id;
@@ -43,17 +29,17 @@ var Utopia;
             var k;
             this.ldice = new Dice(1, 40, "blue", "yellow");
             this.rdice = new Dice(1, 30, "red", "white");
-            this.state = SearchState.WaitingForRoll;
+            this.state = enums_1.SearchState.WaitingForRoll;
             this.top = [null, null, null];
             this.bottom = [null, null, null];
             this.score = [null, null, null];
         }
         Search.prototype.activeDiceVal = function () {
             switch (this.state) {
-                case SearchState.WriteFirstDice: {
+                case enums_1.SearchState.WriteFirstDice: {
                     return this.ldice.value;
                 }
-                case SearchState.WriteSecondDice: {
+                case enums_1.SearchState.WriteSecondDice: {
                     return this.rdice.value;
                 }
             }
@@ -62,7 +48,7 @@ var Utopia;
         Search.prototype.roll = function () {
             this.ldice.roll();
             this.rdice.roll();
-            this.state = SearchState.WriteFirstDice;
+            this.state = enums_1.SearchState.WriteFirstDice;
         };
         Search.prototype.calcScore = function () {
             var sign = 1;
@@ -81,19 +67,19 @@ var Utopia;
                 this.score[col] = this.top[col] - this.bottom[col];
             }
             if (this.score[0] != null && this.score[1] != null && this.score[2] != null) {
-                this.state = SearchState.Finished;
+                this.state = enums_1.SearchState.Finished;
                 this.finalScore = this.calcScore();
             }
         };
         Search.prototype.writeDice = function () {
-            if (this.state === SearchState.WriteFirstDice) {
-                this.state = SearchState.WriteSecondDice;
+            if (this.state === enums_1.SearchState.WriteFirstDice) {
+                this.state = enums_1.SearchState.WriteSecondDice;
                 this.rdice.dicesize = 40;
                 this.ldice.dicesize = 30;
                 return;
             }
-            if (this.state === SearchState.WriteSecondDice) {
-                this.state = SearchState.WaitingForRoll;
+            if (this.state === enums_1.SearchState.WriteSecondDice) {
+                this.state = enums_1.SearchState.WaitingForRoll;
                 this.rdice.dicesize = 30;
                 this.ldice.dicesize = 40;
             }
@@ -152,7 +138,7 @@ var Utopia;
             this.construct = construct;
             this.treasure = treasure;
             this.timelapse = timelapse;
-            this.state = SiteState.Inactive;
+            this.state = enums_1.SiteState.Inactive;
             this.search = new Search();
             this.num_search = 0;
         }

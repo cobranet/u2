@@ -9,9 +9,9 @@ gulp.task('typescript',function(){
     gulp.src('models/**.ts')
 	.pipe(ts({
 	    noImplicitAny: true,
-	    module: 'commonjs'
+	    module: 'amd'
 	}))
-	.pipe(gulp.dest('modelsjs'));
+	.pipe(gulp.dest('app/scripts/'));
 });
 		 
 gulp.task('default', function(cb){
