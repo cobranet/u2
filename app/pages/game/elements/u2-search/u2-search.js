@@ -3,21 +3,20 @@
     'use strict';
     Polymer({
 	is: 'u2-search',
+	listeners: {
+	    'clickrow' : 'clickrow'
+	},
 	properties: {
 	    search: {
-		type: Object
+		type: Object,
+		notify: true
 	    }
 	},
-	arrayItem: function(change,index){
-	    if (change.base[index] != null){
-		return change.base[index];
-	    }
-	    return '\xa0';
-	},
-	notifyScore: function(col){
-	    this.notifyPath('search.score.'+col, -1000);
-	    this.notifyPath('search.score.'+col, this.search.score[col]);
-
+	notifyScore: function(){
+	    this.notifyPath('search.score'  ,
+			    [this.search.score[0],
+			     this.search.score[1],
+			     this.search.score[2]]);
 	},
 	notifyDices: function(){
 	    this.notifyPath('search.ldice.dicesize', this.search.ldice.dicesize);
@@ -29,25 +28,22 @@
 		this.fire('search_end',{score: this.search.finalScore});
 	    }
 	},
+	clickrow: function(e){
+	    var col = e.detail.col;
+	    var row = e.detail.row;
+	    if (row == 'top') {
+		this.search.writeTop(col);
+	    }
+	    if (row == 'bottom') {
+		this.search.writeBottom(col);
+	    }
+	    this.notifyScore();
+	    this.notifyPath('search.'+  row  ,[this.search[row][0],this.search[row][1],this.search[row][2]]);
+	    this.notifyDices();
+	},
 	canClick: function(){
 	    return (this.search.state === Utopia.SearchState.WaitingForRoll || this.search.state === Utopia.SearchState.Finished );
 	}, 
-	clickTop: function(e){
-	    if ( this.canClick() )  {
-		return;
-	    }
-	    var col = e.currentTarget.attributes.col.value;
-
-	    if(this.search.top[col] != null){
-		return;
-	    }
-	    this.search.writeTop(col);
-	    this.notifyPath('search.top.'+ col, -1000);
-	    this.notifyPath('search.top.'+ col, this.search.top[col]);
-	    this.notifyScore();
-	    this.notifyDices();
-
-	},
 	isDicesVisible: function(state){
 	    if (state == Utopia.SearchState.WaitingForRoll ||
 		state == Utopia.SearchState.Finished ) {
@@ -56,6 +52,7 @@
 	    return true;
 	},
 	isButtonVisible: function(state){
+	    this.notifyScore();
 	    if (state === Utopia.SearchState.WaitingForRoll ){
 		return false;
 	    }
@@ -65,23 +62,6 @@
 	    this.search.roll();
 	    this.notifyDices();
 	 
-	},
-	clickBottom: function(e){
-	    if ( this.canClick()){
-		return;
-	    }
-	    var col = e.currentTarget.attributes.col.value;
-	    if(this.search.bottom[col] != null){
-		return;
-	    }
-	    this.search.writeBottom(col);
-	    /* some bug in notify */
-	    this.notifyPath('search.bottom.'+col, -1000);
-	    this.notifyPath('search.bottom.'+col, this.search.bottom[col]);
-	    this.notifyScore();
-	    this.notifyDices();
-	    
-	    
 	}
 	
     }

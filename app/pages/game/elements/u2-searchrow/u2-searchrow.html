@@ -1,0 +1,44 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer.html">
+<dom-module id="u2-searchrow" extend ="tr">
+    <template>
+	<style>
+	 :host {
+             display: block;
+	 }
+	 td {
+	     width: 20px;
+	     border: 1px solid grey;
+	     text-align: center;
+	     height: 20px;
+	 }
+	 table {
+	     padding: 10px;
+	 }
+	 tr.score td {
+	     background-color: lightgray;
+	 }
+	 .dices {
+	     padding: 3px;
+	     text-align: center;
+	     vertical-align: middle;
+	     margin: 6px;
+	 }
+	 .rollbtn {
+	     background-color: navy;
+	     color: white;
+	     padding: 4px;
+	     margin-bottom: 3px;
+	 }
+	 .card {
+	     text-align: center;
+	     min-height: 160px;
+	 }
+	 
+	</style>
+	<template is='dom-repeat' items = "{{arr}}">
+	    <td class$="{{row}}" on-tap="click" col$="{{index}}">{{item}}</td>
+	</template>
+    </template>
+    <script src="/utopia.js"></script>
+    <script src="u2-searchrow.js"></script>
+</dom-module>

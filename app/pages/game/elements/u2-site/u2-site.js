@@ -25,7 +25,7 @@
 	score: function(score){
 	    return this.site.resolve_score(score);
 	},
-	onSearchEnd: function(e){
+	onSearchEnd: function(){
 	    this.state = Utopia.SiteState.ScoreSearch;
 	    this.notifyPath('site.search.finalScore',this.site.search.finalScore);
 	    this.notifyPath('site.state',this.site.search.state);
@@ -54,8 +54,14 @@
 	    }
 	    return false;
 	},
+	arrayItem: function(change,index){
+	    if (change.base[index] != null){
+		return change.base[index];
+	    }
+	    return '\xa0';
+	},
 	search: function(){
-	    this.site.state = Utopia.SiteState.InSearch;
+	    this.site.startNewSearch();
 	    this.notifyPath('site.state',this.site.state);
 	    this.fire('search',{search: this.ind});
 	}

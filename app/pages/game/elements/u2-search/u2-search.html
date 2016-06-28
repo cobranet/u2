@@ -1,5 +1,6 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer.html">
 <link rel="import" href="../ue-dice/ue-dice.html">
+<link rel="import" href="../u2-searchrow/u2-searchrow.html">
 <dom-module id="u2-search">
     <template>
 	<style>
@@ -38,21 +39,18 @@
 	<div>
 	    <paper-card class="card">
 		<table>
-		    <tr>
-			<template is="dom-repeat" items ="{{search.top}}">
-			    <td on-tap="clickTop" col$="{{index}}">{{arrayItem(search.top.*,index)}}</td>
-			</template>
-		    </tr>
-		    <tr>
-			<template is="dom-repeat" items ="{{search.bottom}}">
-			    <td on-tap="clickBottom" col$="{{index}}">{{arrayItem(search.bottom.*,index)}}</td>
-			</template>
-		    </tr>
-		    <tr class="score">
-			<template is="dom-repeat" items ="{{search.score}}">
-			    <td>{{arrayItem(search.score.*,index)}}</td>
-			</template>
-		    </tr>
+		  <tr is="u2-searchrow"
+		      row="top"
+		      arr="{{search.top}}"
+		  </tr>
+		  <tr is="u2-searchrow"
+		      row="bottom"
+		      arr="{{search.bottom}}"
+		  </tr>
+		  <tr is="u2-searchrow"
+		      row="score"
+		      arr="{{search.score}}"
+		  </tr>
 		</table>
 		<div class="dices" hidden$="{{!isDicesVisible(search.state)}}">
 		    <ue-dice dice="{{search.ldice}}"></ue-dice>

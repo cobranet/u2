@@ -1,7 +1,21 @@
-"use strict";
-var enums_1 = require('./enums');
 var Utopia;
 (function (Utopia) {
+    (function (SearchState) {
+        SearchState[SearchState["WaitingForRoll"] = 0] = "WaitingForRoll";
+        SearchState[SearchState["WriteFirstDice"] = 1] = "WriteFirstDice";
+        SearchState[SearchState["WriteSecondDice"] = 2] = "WriteSecondDice";
+        SearchState[SearchState["Finished"] = 3] = "Finished";
+    })(Utopia.SearchState || (Utopia.SearchState = {}));
+    var SearchState = Utopia.SearchState;
+    ;
+    (function (SiteState) {
+        SiteState[SiteState["Inactive"] = 0] = "Inactive";
+        SiteState[SiteState["InSearch"] = 1] = "InSearch";
+        SiteState[SiteState["OtherSearch"] = 2] = "OtherSearch";
+        SiteState[SiteState["ScoreSearch"] = 3] = "ScoreSearch";
+    })(Utopia.SiteState || (Utopia.SiteState = {}));
+    var SiteState = Utopia.SiteState;
+    ;
     var Dice = (function () {
         function Dice(value, dicesize, color, dotcolor) {
             this.value = value;
@@ -25,21 +39,27 @@ var Utopia;
     Utopia.Player = Player;
     var Search = (function () {
         function Search() {
-            var i;
-            var k;
             this.ldice = new Dice(1, 40, "blue", "yellow");
             this.rdice = new Dice(1, 30, "red", "white");
-            this.state = enums_1.SearchState.WaitingForRoll;
+            this.state = SearchState.WaitingForRoll;
             this.top = [null, null, null];
             this.bottom = [null, null, null];
             this.score = [null, null, null];
         }
+        Search.prototype.reset = function () {
+            this.ldice = new Dice(1, 40, "blue", "yellow");
+            this.rdice = new Dice(1, 30, "red", "white");
+            this.state = SearchState.WaitingForRoll;
+            this.top = [null, null, null];
+            this.bottom = [null, null, null];
+            this.score = [null, null, null];
+        };
         Search.prototype.activeDiceVal = function () {
             switch (this.state) {
-                case enums_1.SearchState.WriteFirstDice: {
+                case SearchState.WriteFirstDice: {
                     return this.ldice.value;
                 }
-                case enums_1.SearchState.WriteSecondDice: {
+                case SearchState.WriteSecondDice: {
                     return this.rdice.value;
                 }
             }
@@ -48,7 +68,7 @@ var Utopia;
         Search.prototype.roll = function () {
             this.ldice.roll();
             this.rdice.roll();
-            this.state = enums_1.SearchState.WriteFirstDice;
+            this.state = SearchState.WriteFirstDice;
         };
         Search.prototype.calcScore = function () {
             var sign = 1;
@@ -67,19 +87,19 @@ var Utopia;
                 this.score[col] = this.top[col] - this.bottom[col];
             }
             if (this.score[0] != null && this.score[1] != null && this.score[2] != null) {
-                this.state = enums_1.SearchState.Finished;
+                this.state = SearchState.Finished;
                 this.finalScore = this.calcScore();
             }
         };
         Search.prototype.writeDice = function () {
-            if (this.state === enums_1.SearchState.WriteFirstDice) {
-                this.state = enums_1.SearchState.WriteSecondDice;
+            if (this.state === SearchState.WriteFirstDice) {
+                this.state = SearchState.WriteSecondDice;
                 this.rdice.dicesize = 40;
                 this.ldice.dicesize = 30;
                 return;
             }
-            if (this.state === enums_1.SearchState.WriteSecondDice) {
-                this.state = enums_1.SearchState.WaitingForRoll;
+            if (this.state === SearchState.WriteSecondDice) {
+                this.state = SearchState.WaitingForRoll;
                 this.rdice.dicesize = 30;
                 this.ldice.dicesize = 40;
             }
@@ -138,9 +158,10 @@ var Utopia;
             this.construct = construct;
             this.treasure = treasure;
             this.timelapse = timelapse;
-            this.state = enums_1.SiteState.Inactive;
-            this.search = new Search();
+            this.state = SiteState.Inactive;
             this.num_search = 0;
+            this.scores = new Array();
+            this.search = new Search();
         }
         Site.prototype.resolve_score = function (score) {
             var search_score;
@@ -162,6 +183,13 @@ var Utopia;
                 };
                 return search_score;
             }
+        };
+        Site.prototype.startNewSearch = function () {
+            alert('new Search');
+            this.state = Utopia.SiteState.InSearch;
+            this.scores.push(this.search.calcScore());
+            this.search.reset();
+            return this.search;
         };
         return Site;
     }());

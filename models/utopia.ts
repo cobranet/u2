@@ -1,5 +1,7 @@
-import { SearchState, SiteState } from './enums';
 module Utopia {
+    export enum SearchState { WaitingForRoll, WriteFirstDice, WriteSecondDice, Finished };
+    export enum SiteState { Inactive, InSearch, OtherSearch, ScoreSearch };
+
     class Dice {
         constructor(public value: number,
             public dicesize: number,
@@ -28,8 +30,6 @@ module Utopia {
         score: Array<number>;
         finalScore: number;
         constructor() {
-            var i: number;
-            var k: number;
             this.ldice = new Dice(1, 40, "blue", "yellow");
             this.rdice = new Dice(1, 30, "red", "white");
             this.state = SearchState.WaitingForRoll;
@@ -37,7 +37,14 @@ module Utopia {
             this.bottom = [null, null, null];
             this.score = [null, null, null];
         }
-
+        reset() {
+            this.ldice = new Dice(1, 40, "blue", "yellow");
+            this.rdice = new Dice(1, 30, "red", "white");
+            this.state = SearchState.WaitingForRoll;
+            this.top = [null, null, null];
+            this.bottom = [null, null, null];
+            this.score = [null, null, null];
+        }
         activeDiceVal() {
             switch (this.state) {
                 case SearchState.WriteFirstDice: {
@@ -129,6 +136,7 @@ module Utopia {
         state: SiteState;
         search: Search;
         num_search: number;
+        scores: Array<number>;
         resolve_score(score: number) {
             var search_score: any;
             if (score > -1 && score < 1100) {
@@ -150,15 +158,26 @@ module Utopia {
                 return search_score;
             }
         }
+        startNewSearch() {
+            alert('new Search');
+            this.state = Utopia.SiteState.InSearch;
+            this.scores.push(this.search.calcScore());
+            this.search.reset();
+            return this.search;
+
+        }
         constructor(public name: String, public image: String, public component: Component, public construct: Construct, public treasure: Treasure, public timelapse: TimeLapse) {
             this.state = SiteState.Inactive;
-            this.search = new Search();
             this.num_search = 0;
+            this.scores = new Array<number>();
+            this.search = new Search();
+
         }
     }
 
     export class Game {
         sites: Array<Site>;
+
         constructor(public player: Player) {
             this.sites = new Array<Site>();
             this.sites.push(new Site("Forest", "forest.png",

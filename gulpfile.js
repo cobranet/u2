@@ -8,10 +8,9 @@ var ts = require('gulp-typescript');
 gulp.task('typescript',function(){
     gulp.src('models/**.ts')
 	.pipe(ts({
-	    noImplicitAny: true,
-	    module: 'amd'
+	    noImplicitAny: true
 	}))
-	.pipe(gulp.dest('app/scripts/'));
+	.pipe(gulp.dest('modelsjs'));
 });
 		 
 gulp.task('default', function(cb){

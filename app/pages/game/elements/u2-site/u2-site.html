@@ -31,6 +31,8 @@
 	 }
 	</style>
 	<div class="site horizontal">
+	  <span>{{site.state}}</span>
+	  <span>{{arrayItem(site.search.top.*,index)}}</span>
 	    <paper-card class="sitepaper" heading="{{site.name}}">
 		<div class="card-content sitecontent" style="background:url({{site.image}})" >
 		    <div class="info">
